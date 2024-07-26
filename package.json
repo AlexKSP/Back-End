@@ -2,15 +2,20 @@
   "name": "back-end",
   "version": "1.0.0",
   "description": "Estudos de Back-End",
-  "type":"module",
+  "type": "module",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "node --watch server.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@prisma/client": "^5.17.0",
     "express": "^4.19.2"
+  },
+  "devDependencies": {
+    "prisma": "^5.17.0"
   }
 }
