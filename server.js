@@ -15,12 +15,16 @@ app.use(express.json())
 
 //requisição do cliente, resposta do servidor.
 
-/*Métodos HTTP
+/*Métodos HTTP = chamado de CRUD todas questões a baixo.
+
 Get -> Listar
 Post -> Criar
 Put -> Editar varios
 Patch -> Editar um
 Delete -> Deletar
+
+
+
 */
 
 /*
@@ -70,9 +74,43 @@ app.post('/usuarios', async (req, res) => {
     res.status(201).json({ message: "Usuário criado com sucesso"}) //por estar no ambiente JS usando Json não preciso usar aspas duplas
 })
 
+
+app.put('/usuarios/:id', async (req, res) => {
+    
+    //Put é para editar, por isso tenho de usar update e não creat.
+    //Como vou atualizar a informação de um item do meu banco de dados, tenho de falar pra aonde vou atualizar essa informação, qual será atualizada, por isso na documentação do prisma ele já informa como fazer isso.
+    const user = await prisma.user.update({
+        //route params é bom aqui pois é algo unico e "preciso que estarei enviando" por isso no app.put eu edito mandando o /:d
+        where: {
+            id: req.params.id
+        },
+        data: {
+            email: req.body.email,
+            name: req.body.name,
+            age: req.body.age 
+        }
+    })
+
+    console.log(user)
+
+    res.status(200).json({ message: "Editado com sucesso!"}) 
+})
+
+app.delete('/usuarios/:id', async (req, res) => {
+    const userDelete = await prisma.user.delete({
+        where: {
+            id: req.params.id
+        }
+    })
+
+    console.log(userDelete)
+    res.status(200).json({ message: "Usuario deletado com sucesso."})
+})
+
 //Aqui está rodando meu servidor.
 app.listen(3000)
 
 //Aula 12, vamos criar uma usuario. Usando a rota do tipo post
 
 //const users = []
+
