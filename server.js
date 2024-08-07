@@ -3,6 +3,8 @@
 //novo
 import express from 'express'
 
+import cors from 'cors'
+
 
 //ler documentação do Prisma. { prisma } ele vai trazer somente uma coisa que quero e sem, ele importa tudo como o express. Ler documentação das bibliotecas.
 import { PrismaClient } from '@prisma/client'
@@ -12,6 +14,7 @@ const prisma = new PrismaClient()
 //aqui estou fakabdi qual a porta no meu local host o servidor da minha aplicação vai rodar.
 const app = express()
 app.use(express.json())
+app.use(cors())
 
 //requisição do cliente, resposta do servidor.
 
